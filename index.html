@@ -286,7 +286,7 @@ footer{color:var(--text-muted);font-size:11px;text-align:center;padding:18px;bor
 .tmsep{height:1px;background:var(--border);margin:5px 4px}
 .dash-sec-title{font-size:16px;color:var(--primary);font-weight:700;margin:24px 0 12px;padding-top:18px;border-top:2px solid var(--border)}
 .la-window{font-size:12.5px;color:var(--text-muted);background:var(--card-bg);border:1px solid var(--border);border-radius:8px;padding:9px 12px;margin-bottom:12px}
-.la-grp td{color:#fff;font-weight:700;letter-spacing:.3px;padding:7px 10px}
+.la-grp td{color:#fff !important;font-weight:700;letter-spacing:.3px;padding:7px 10px}
 .srcbadge{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:600;padding:6px 12px;border-radius:14px;margin:0 0 12px;line-height:1.3}
 .srcbadge.link{background:#e4f6f8;color:#0b6b73;border:1px solid #bfe6ea}
 .srcbadge.ind{background:#eef1f5;color:#5b6b7a;border:1px solid #dde3ea}
@@ -940,8 +940,10 @@ function gPasteText(txt,r0,c0){delPush();let lines=txt.replace(/\r/g,'').split('
 function gClear(){delPush();const R=gRange();for(let r=R.r1;r<=R.r2;r++)for(let c=R.c1;c<=R.c2;c++)gSet(r,c,'');delSave();renderDelTable();gPaint();}
 function gDoFill(toR,toC){const S=gFillSrc;if(!S)return;delPush();const r2=Math.max(S.r2,toR),c2=Math.max(S.c2,toC);const sh=S.r2-S.r1+1,sw=S.c2-S.c1+1;for(let r=S.r1;r<=r2;r++)for(let c=S.c1;c<=c2;c++){if(r>=S.r1&&r<=S.r2&&c>=S.c1&&c<=S.c2)continue;const sr=S.r1+((r-S.r1)%sh),sc=S.c1+((c-S.c1)%sw);gSet(r,c,gVal(sr,sc));}gA={r:S.r1,c:S.c1};gB={r:r2,c:c2};delSave();renderDelTable();gPaint();}
 function gridBind(adm){
-  document.querySelectorAll('#delTbl tbody tr[data-id]').forEach(function(tr){tr.ondblclick=function(e){if(e.target.closest('a,button'))return;if(isAdmin()&&e.target.closest('td.dcell'))return;openDelTracker(+tr.dataset.id);};});
-  if(!adm){document.querySelectorAll('#delTbl tbody tr[data-id]').forEach(tr=>{tr.onclick=e=>{if(e.target.closest('a,button'))return;document.querySelectorAll('#delTbl tbody tr.selrow').forEach(x=>x.classList.remove('selrow'));tr.classList.add('selrow');};});return;}
+  document.querySelectorAll('#delTbl tbody tr[data-id]').forEach(function(tr){tr.ondblclick=function(e){if(e.target.closest('a,button'))return;openDelTracker(+tr.dataset.id);};});
+  /* Delivery is read-only: data comes only from KAFD00330_Delivery_Master.xlsx. Cells are locked (no inline editing) for everyone. */
+  document.querySelectorAll('#delTbl tbody tr[data-id]').forEach(tr=>{tr.onclick=e=>{if(e.target.closest('a,button'))return;document.querySelectorAll('#delTbl tbody tr.selrow').forEach(x=>x.classList.remove('selrow'));tr.classList.add('selrow');};});
+  return;
   document.querySelectorAll('#delTbl tbody td.dcell').forEach(td=>{
     td.style.cursor='cell';
     td.onmousedown=function(e){if(this.getAttribute('contenteditable')==='true')return;const r=gTrs().indexOf(this.closest('tr')),c=+this.dataset.ci;gDrag=true;if(e.shiftKey){gB={r,c};}else{gA={r,c};gB={r,c};}gPaint();};
@@ -1122,15 +1124,14 @@ function renderDelTable(){
   const adm=isAdmin();
   const rows=delFiltered();
   const arr=k=>delState.sortKey===k?(delState.sortDir===-1?' ▼':' ▲'):'';
-  document.querySelector('#delTbl thead').innerHTML='<tr><th>SL</th>'+DCOLS.map(c=>`<th data-sortk="${c.k}" style="cursor:pointer" title="Sort">${c.h}${arr(c.k)}</th>`).join('')+(adm?'<th></th>':'')+'</tr>';
+  document.querySelector('#delTbl thead').innerHTML='<tr><th>SL</th>'+DCOLS.map(c=>`<th data-sortk="${c.k}" style="cursor:pointer" title="Sort">${c.h}${arr(c.k)}</th>`).join('')+'</tr>';
   document.querySelectorAll('#delTbl thead th[data-sortk]').forEach(th=>th.onclick=()=>{const k=th.dataset.sortk;if(delState.sortKey===k){delState.sortDir=(delState.sortDir||1)*-1;}else{delState.sortKey=k;delState.sortDir=1;}renderDelTable();});
   if(!rows.length){
-    document.querySelector('#delTbl tbody').innerHTML=`<tr><td colspan="${DCOLS.length+1+(adm?1:0)}" style="text-align:center;color:var(--text-muted);padding:20px">No lines match the filter.</td></tr>`;
+    document.querySelector('#delTbl tbody').innerHTML=`<tr><td colspan="${DCOLS.length+1}" style="text-align:center;color:var(--text-muted);padding:20px">No lines match the filter.</td></tr>`;
   } else {
     document.querySelector('#delTbl tbody').innerHTML=rows.map((r,idx)=>{
       return '<tr data-id="'+r._id+'"><td class="sltrk" title="Double-click this PO line for the material status tracker" style="font-weight:600;color:var(--primary);cursor:pointer">'+(idx+1)+'</td>'+
-      DCOLS.map((c,ci)=>delCell(r,c,ci)).join('')+
-      (adm?'<td style="white-space:nowrap"><button class="editrow" data-id="'+r._id+'" title="Edit / fill">✎</button> <button class="delrow" data-id="'+r._id+'" title="Delete line">✕</button></td>':'')+'</tr>';}).join('');
+      DCOLS.map((c,ci)=>delCell(r,c,ci)).join('')+'</tr>';}).join('');
   }
   document.getElementById('delCount').textContent=`${rows.length} of ${DELV.length} lines`;
   gridBind(adm);
@@ -1281,14 +1282,7 @@ function renderLookahead(){
     var info=(typeof AIDINFO!=='undefined'&&AIDINFO[a.aid])?AIDINFO[a.aid]:{};
     evts.push({d:d,aid:a.aid,stage:(STLBL[a.stage]||a.stage),plan:plan,act:act,scope:info.boq||''});
   });
-  if(!evts.length){
-    DELV.forEach(function(r){
-      var dl=(r.delivery||'').trim().toLowerCase();
-      if(dl!=='delivered'){var e=laDate(r.eta)||laDate(r.baseline_eta);if(e){var n=dd(e);if(n>=-14&&n<=(HZ-1))evts.push({d:e,aid:(r.act_id||''),stage:'Delivery',scope:(r.material||''),plan:null,act:null,extra:(r.delivery||'Not Started')});}}
-      var st=(r.po_status||'').trim().toLowerCase();
-      if(st!=='issued'&&st!=='cancelled'){var d2=laDate(r.po_plan_date);if(d2){var n2=dd(d2);if(n2>=-14&&n2<=(HZ-1))evts.push({d:d2,aid:(r.act_id||''),stage:'PO Issuance',scope:(r.material||''),plan:null,act:null,extra:(r.po_status||'Not Issued')});}}
-    });
-  }
+  var noFinish=!BASELINE.some(function(a){return a.finish;});
   evts.sort(function(a,b){return a.d-b.d;});
   var over=evts.filter(function(x){return dd(x.d)<0;});
   var wk1=evts.filter(function(x){var n=dd(x.d);return n>=0&&n<=6;});
@@ -1305,7 +1299,7 @@ function renderLookahead(){
   function grp(title,arr,color){if(!arr.length)return '';return '<tr class="la-grp" style="background:'+color+'"><td colspan="9">'+title+' — '+arr.length+'</td></tr>'+arr.map(rowHtml).join('');}
   var sO=(LA_F==='all'||LA_F==='over'),s1=(LA_F==='all'||LA_F==='wk1'||LA_F==='fwd'),s2=(LA_F==='all'||LA_F==='wk2'||LA_F==='fwd');
   var body=(sO?grp('Overdue — last 14 days (behind, still open)',over,'#c0392b'):'')+(s1?grp('This week',wk1,'var(--primary)'):'')+(s2?grp('Next week',wk2,'#0e7c8a'):'');
-  if(!evts.length)body='<tr><td colspan="9" style="text-align:center;color:var(--text-muted);padding:22px">Nothing due in this window.</td></tr>';
+  if(!evts.length)body='<tr><td colspan="9" style="text-align:center;color:var(--text-muted);padding:22px">'+(noFinish?'Planning schedule not loaded yet — open the published site so <b>Procurement Progress Tracking</b> (with a Finish/BL Finish column) can load.':'No activities finishing in this window.')+'</td></tr>';
   else if(!body)body='<tr><td colspan="9" style="text-align:center;color:var(--text-muted);padding:18px">No items in this filter — click the highlighted card again to show all.</td></tr>';
   wrap.innerHTML=head+kpis+'<div class="tablewrap"><table id="laTbl"><thead><tr><th>BL Finish</th><th>Day</th><th>When</th><th>Activity ID</th><th>Stage</th><th>Scope / Mapping</th><th>Plan %</th><th>Actual %</th><th>Delay</th></tr></thead><tbody>'+body+'</tbody></table></div>';
   wrap.querySelectorAll('.kpi[data-laf]').forEach(function(el){el.onclick=function(){var k=el.dataset.laf;LA_F=(LA_F===k?'all':k);renderLookahead();};});
