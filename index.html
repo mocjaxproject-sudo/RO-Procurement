@@ -291,44 +291,61 @@ footer{color:var(--text-muted);font-size:11px;text-align:center;padding:18px;bor
 .srcbadge.link{background:#e4f6f8;color:#0b6b73;border:1px solid #bfe6ea}
 .srcbadge.ind{background:#eef1f5;color:#5b6b7a;border:1px solid #dde3ea}
 .srcbadge b{font-weight:800}
-body.dark .srcbadge.link{background:#0c3a40;color:#8fdbe2;border-color:#155b63}
-body.dark .srcbadge.ind{background:#1b2838;color:#9fb0bf;border-color:#2a3848}
+body.dark .srcbadge.link{background:#0c2b2f;color:#8fdbe2;border-color:#1c4a50}
+body.dark .srcbadge.ind{background:#16181c;color:#b0bac4;border-color:#2c2f36}
 /* ============ DARK THEME (comprehensive) ============ */
-body.dark{--bg:#0e1621;--card-bg:#172230;--text:#e7eef5;--text-muted:#94a6b8;--border:#2b3a4c;--info:#4aa3df}
+body.dark{--bg:#000000;--card-bg:#141518;--text:#f6f8fb;--text-muted:#c2ccd6;--border:#2c2f36;--info:#4aa3df}
+body.dark{font-size:13.5px}
+body.dark .header{background:linear-gradient(135deg,#053b42 0%,#08636d 100%);box-shadow:0 2px 10px rgba(0,0,0,.65)}
+body.dark .tabs{background:#0b0c0e;box-shadow:0 1px 3px rgba(0,0,0,.5)}
+body.dark .tab.active{color:#4fd0dc}
+body.dark .note{font-size:12px}
+body.dark table{font-size:12.5px}
+body.dark thead th{font-size:11.5px}
+body.dark .kpi .lbl{color:#cbd5df;font-size:11.5px}
+body.dark .kpi .sub{color:#b3bdc8}
+body.dark .kpi .val{color:#4fd0dc}
+body.dark .card h3{color:#4fd0dc}
+body.dark .card h3 small{color:#b3bdc8}
+body.dark .tab{color:#c2ccd6}
+body.dark .dash-sec-title{color:#4fd0dc}
+body.dark tbody td:first-child{color:#4fd0dc}
+body.dark .pomodal-title,body.dark .card h3,body.dark .dash-sec-title,body.dark .kpi .val,body.dark tbody td:first-child,body.dark .tab.active,body.dark .tab:hover{color:#7fe6f0}
+body.dark .btn.accent{color:#2a2000}
 /* surfaces & menus */
-body.dark .toolmenu,body.dark .pomodal-box{background:#172230;color:var(--text);border-color:#2b3a4c}
-body.dark .tmi{color:var(--text)} body.dark .tmi:hover{background:#243243}
-body.dark .btn-cancel{background:#26333f;color:var(--text)}
+body.dark .toolmenu,body.dark .pomodal-box{background:#16181c;color:var(--text);border-color:#2c2f36}
+body.dark .tmi{color:var(--text)} body.dark .tmi:hover{background:#20242a}
+body.dark .btn-cancel{background:#22262c;color:var(--text)}
 /* tables — teal header kept; dark body rows */
-body.dark tbody td{border-bottom-color:#243243}
-body.dark tbody tr:nth-child(even) td{background:#1b2735}
-body.dark tbody tr:hover td{background:#123a40}
-body.dark #tbl tbody tr:nth-child(odd) td{background:#1b2735}
-body.dark #tbl tbody tr:nth-child(even) td{background:#152230}
-body.dark #tbl tbody tr:hover td{background:#123a40}
-body.dark #tbl td,body.dark #tbl th{border-right-color:#2b3a4c}
-body.dark #tbl .added-row td{background:#2c2712 !important}
+body.dark tbody td{border-bottom-color:#23262c}
+body.dark tbody tr:nth-child(even) td{background:#0e0f12}
+body.dark tbody tr:hover td{background:#10302e}
+body.dark #tbl tbody tr:nth-child(odd) td{background:#141518}
+body.dark #tbl tbody tr:nth-child(even) td{background:#0b0c0e}
+body.dark #tbl tbody tr:hover td{background:#10302e}
+body.dark #tbl td,body.dark #tbl th{border-right-color:#2c2f36}
+body.dark #tbl .added-row td{background:#2a2410 !important}
 body.dark #tbl .added-row:hover td{background:#3a3318 !important}
 /* notes / badges / chips */
-body.dark .note{background:#14222f;color:#b4c2d0}
+body.dark .note{background:#111318;color:#d2dbe4;border-left-color:var(--info)}
 body.dark .miss{color:#ff8b7a}
-body.dark .chip.gray{background:#26333f;color:#aab8c4}
+body.dark .chip.gray{background:#22262c;color:#b6c0ca}
 body.dark .chip.green{background:#10331f;color:#5fd398} body.dark .chip.red{background:#3a1d1d;color:#ff8b7a}
 body.dark .chip.amber{background:#37300f;color:#e7c64a} body.dark .chip.blue{background:#10293a;color:#6fc0ec}
 /* KPI cards */
-body.dark .kpi .bar{background:#243243}
+body.dark .kpi .bar{background:#23262c}
 body.dark .kpi .ic{background:#0e3036;color:#2bb8c4}
 body.dark .kpi.good .ic{background:#10331f;color:#43c47e}
 body.dark .kpi.warn .ic{background:#37300f;color:#e7b54a}
 body.dark .kpi.bad .ic{background:#3a1d1d;color:#ef6b6b}
 body.dark .kpi.acc .ic{background:#0e3036;color:#2bb8c4}
 /* project tabs / gap tiles */
-body.dark .dptab{background:#1b2838;color:#7fd4dc;border-color:#2b3a4c}
-body.dark .dptab:hover{background:#243243}
+body.dark .dptab{background:#16181c;color:#7fd4dc;border-color:#2c2f36}
+body.dark .dptab:hover{background:#20242a}
 body.dark .gap-tile.active{background:#2c2712}
 /* form fields */
-body.dark input,body.dark select,body.dark textarea{background:#1b2838;color:var(--text);border-color:#2b3a4c}
-body.dark .filters input,body.dark .filters select{background:#1b2838;color:var(--text);border-color:#2b3a4c}
+body.dark input,body.dark select,body.dark textarea{background:#16181c;color:var(--text);border-color:#2c2f36}
+body.dark .filters input,body.dark .filters select{background:#16181c;color:var(--text);border-color:#2c2f36}
 body.dark td[contenteditable]:focus{background:#3a3514;color:#fbf3c9}
 body.dark #delTbl td.dcell.editing{background:#3a3514 !important;color:#fbf3c9 !important}
 /* delivery grid states */
@@ -337,19 +354,19 @@ body.dark #delTbl tbody tr.selrow td{background:#123a40 !important}
 body.dark #delTbl td.gsel{background:#0f3238 !important}
 body.dark #delTbl td.gactive{background:#15414a !important}
 /* tracker stepper */
-body.dark .trk-dot{background:#1b2838;border-color:#2b3a4c;color:#94a6b8}
-body.dark .trk-line{background:#2b3a4c}
+body.dark .trk-dot{background:#16181c;border-color:#2c2f36;color:#c2ccd6}
+body.dark .trk-line{background:#2c2f36}
 /* misc */
-body.dark .backbtn{background:#243243;color:#7fd4dc;border-color:#2b3a4c}
-body.dark .backbtn:hover{background:#2c3d50}
-body.dark footer{color:#8696a6}
-body.dark ::-webkit-scrollbar-thumb{background:#3a4a5c;border:4px solid #11202c}
-body.dark ::-webkit-scrollbar-thumb:hover{background:#4a5d72}
-body.dark ::-webkit-scrollbar-track{background:#11202c}
-body.dark .tablewrap{scrollbar-color:#3a4a5c #11202c}
+body.dark .backbtn{background:#1c1f24;color:#7fd4dc;border-color:#2c2f36}
+body.dark .backbtn:hover{background:#262b31}
+body.dark footer{color:#9aa4ae}
+body.dark ::-webkit-scrollbar-thumb{background:#3a3f47;border:4px solid #0a0a0a}
+body.dark ::-webkit-scrollbar-thumb:hover{background:#4a515b}
+body.dark ::-webkit-scrollbar-track{background:#0a0a0a}
+body.dark .tablewrap{scrollbar-color:#3a3f47 #0a0a0a}
 /* total row (themeable both modes) */
 .tot-row td{background:#eef3f9}
-body.dark .tot-row td{background:#13283a}
+body.dark .tot-row td{background:#10302e}
 .backbtn{background:#eef1f5;color:var(--primary);border:1px solid var(--border);padding:7px 14px;border-radius:7px;font-weight:700;cursor:pointer;font-size:12.5px;margin-bottom:12px}
 .backbtn:hover{background:#dde6ef}
 </style>
@@ -383,23 +400,23 @@ body.dark .tot-row td{background:#13283a}
   <div class="tab active" data-view="dash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>KPI Dashboard</div>
   <div class="tab" data-view="delivery"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>Delivery</div>
   <div class="tab" data-view="lookahead"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M8 14h3M8 18h3M14 14h2"/></svg>2-Week Look Ahead</div>
+  <div class="tab" data-view="recovery"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 4v4h4"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Delays &amp; Recovery</div>
   <div class="tab" data-view="fat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>FAT Register</div>
   <div class="tab" data-view="spares"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg>Spare Parts</div>
 </div>
 
 <main>
   <section class="view active" id="view-dash">
-    <div class="srcbadge link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.5 1.5"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7L12 19"/></svg><span>Linked to the uploaded <b>Planning Report</b> (Tools &rarr; Upload planning report). Weekly, stage and Delays &amp; Recovery figures update from it.</span></div>
     <div class="kpis" id="wkKpis"></div>
     <div class="grid2">
       <div class="card"><h3><span class="ht"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="20" x2="6" y2="13"/><line x1="12" y1="20" x2="12" y2="8"/><line x1="18" y1="20" x2="18" y2="4"/></svg></span>Weight vs Plan vs Actual by stage</h3><div class="chartwrap"><canvas id="cWeekly"></canvas></div></div>
       <div class="card"><h3><span class="ht"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="9" x2="9" y2="20"/></svg></span>Stage breakdown</h3><div class="tablewrap" style="max-height:280px"><table id="wkTbl"><thead><tr><th>Stage</th><th>Weight</th><th>Plan %</th><th>Actual %</th><th>Variance</th></tr></thead><tbody></tbody></table></div></div>
     </div>
-  <h2 class="dash-sec-title">Delays &amp; Recovery</h2>
-    <div class="note">Stage variance is shown in the cards (positive = ahead of plan). The table below <strong>automatically lists the activities behind plan</strong> (Actual &lt; Plan), grouped by stage, worst first. Unlock Admin to fill Owner, Recovery action, Target date and Status.</div>
+  </section>
+
+  <section class="view" id="view-recovery">
     <div class="kpis" id="recKpis"></div>
     <div class="card"><h3><span class="ht"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18.7 8l-5.1 5.2-2.8-2.8L7 14"/></svg></span>Delay &amp; recovery by stage</h3><div class="tablewrap"><table id="stageRecTbl"><thead><tr><th>Stage</th><th>Weight %</th><th>Plan %</th><th>Actual %</th><th>Delay</th><th>Recovery action</th><th>Owner</th><th>Target date</th><th>Status</th></tr></thead><tbody></tbody></table></div></div>
-    
     <div class="card"><h3><span class="ht"></span>Delayed activities &amp; recovery actions <small id="recCount" style="margin-left:auto;color:var(--text-muted);font-weight:600"></small></h3>
       <div class="tablewrap" style="max-height:420px"><table id="recTbl"><thead><tr><th>Activity ID</th><th>Stage</th><th>Scope / Mapping</th><th>Plan %</th><th>Actual %</th><th>Delay</th><th>Recovery action</th><th>Owner</th><th>Target date</th><th>Status</th></tr></thead><tbody></tbody></table></div>
     </div>
@@ -408,14 +425,12 @@ body.dark .tot-row td{background:#13283a}
   <section class="view" id="view-tracker">
     <button class="backbtn" onclick="showView('dash')">&larr; Back to KPI Dashboard</button>
     <div class="kpis" id="kpis"></div>
-    <div class="note">Click any cell with a dashed underline to edit it (progress %, MAR, PO, ETA, MIR, remarks). Edits auto-save to this browser and can be exported. Red italics = data missing in source.</div>
     <div class="filters" id="trackerFilters"></div>
     <div class="tablewrap"><table id="tbl"><thead></thead><tbody></tbody></table></div>
   </section>
 
   <section class="view" id="view-gaps">
     <button class="backbtn" onclick="showView('dash')">&larr; Back to KPI Dashboard</button>
-    <div class="note">Targets your three alignment problems: material items with no BOQ number, no Activity-ID mapping, or missing procurement documents (MAR / PO). Click a tile to filter.</div>
     <div class="gap-grid" id="gapTiles"></div>
     <div class="card" style="margin-bottom:14px"><h3><span class="ht"></span>Document coverage (present vs missing)</h3><div class="chartwrap" style="height:210px"><canvas id="cDoc"></canvas></div></div>
     <div class="filters"><input type="text" id="gapSearch" placeholder="Search description / BOQ / mapping…"><span class="count-pill" id="gapCount"></span></div>
@@ -423,8 +438,6 @@ body.dark .tot-row td{background:#13283a}
   </section>
 
   <section class="view" id="view-delivery">
-    <div class="srcbadge link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.5 1.5"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7L12 19"/></svg><span>Linked to <b>KAFD00330_Delivery_Master.xlsx</b> (● Live / Tools &rarr; Update &amp; publish).</span></div>
-    <div class="note">Material delivery schedule (driven by the linked master Excel or <strong>+ Add PO line</strong>). <strong>Double-click any PO line</strong> to open its material status tracker. <strong>Spreadsheet edit (Admin):</strong> select a cell, click-drag or Shift+click for a range, arrow-keys to move, double-click a cell to edit, <strong>Ctrl+C / Ctrl+V</strong> to copy-paste, drag the corner handle to fill, Delete to clear.</div>
     <div class="dptabs" id="delProjTabs"></div>
     <div class="kpis" id="delKpis"></div>
     <div class="filters" id="delFilters"></div>
@@ -439,7 +452,7 @@ body.dark .tot-row td{background:#13283a}
       <div id="colMgrBody" style="max-height:48vh;overflow:auto"></div>
       <div class="pomodal-actions"><button class="btn-cancel" id="colCloseBtn">Close</button></div>
     </div></div>
-    <div id="trkModal" class="pomodal" onclick="if(event.target===this)closeTrk()"><div class="pomodal-box" style="max-width:560px"><div class="pomodal-title" id="trkTitle">Material Status Tracker</div><div id="trkBody"></div><div class="pomodal-actions"><button class="btn-cancel" id="trkClose" onclick="closeTrk()">Close</button></div></div></div>
+    <div id="trkModal" class="pomodal" onclick="if(event.target===this)closeTrk()"><div class="pomodal-box" style="max-width:940px"><div class="pomodal-title" id="trkTitle">Material Status Tracker</div><div id="trkBody"></div><div class="pomodal-actions"><button class="btn-cancel" id="trkClose" onclick="closeTrk()">Close</button></div></div></div>
     <div id="syncModal" class="pomodal"><div class="pomodal-box" style="max-width:560px">
       <div class="pomodal-title">Update Delivery from Excel (OneDrive)</div>
       <div style="background:#e9f6f7;border:1px solid #b9e2e6;border-radius:8px;padding:11px 12px;margin-bottom:14px">
@@ -455,21 +468,15 @@ body.dark .tot-row td{background:#13283a}
     </div></div>
   </section>
   <section class="view" id="view-lookahead">
-    <div class="srcbadge link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><span>Rolling 2-week window from <b>today’s date</b> — rebuilt every time you open the report, from the Delivery data (Excel-linked).</span></div>
-    <div class="note">Upcoming procurement milestones in the next 14 days: <b>PO issuances</b> (not yet issued) and <b>material ETAs</b> (not yet delivered). Past-due open items appear under “Overdue”. <b>Click any card to filter</b> the list.</div>
     <div id="laWrap"></div>
   </section>
   
   <section class="view" id="view-fat">
-    <div class="srcbadge ind"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><circle cx="12" cy="12" r="9"/><line x1="12" y1="7" x2="12" y2="13"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span>Independent register — not linked to other tabs. Maintained here (Admin), auto-saved.</span></div>
-    <div class="note">Factory Acceptance Test register (KAFD-636-SBC-QMS-FAT-00001). 45 equipment items requiring FAT. Record FAT status, date and remarks (auto-saved locally).</div>
     <div class="kpis" id="fatKpis"></div>
     <div class="filters" id="fatFilters"></div>
     <div class="tablewrap"><table id="fatTbl"><thead></thead><tbody></tbody></table></div>
   </section>
   <section class="view" id="view-spares">
-    <div class="srcbadge ind"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><circle cx="12" cy="12" r="9"/><line x1="12" y1="7" x2="12" y2="13"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span>Independent register — not linked to other tabs. Maintained here (Admin), auto-saved.</span></div>
-    <div class="note">Spare Parts &amp; Extra Items list (KAFD-636-SBC-HOM-LST-00001). 174 handover/O&amp;M items. Record part number, vendor, balance, store and procurement status (auto-saved locally).</div>
     <div class="kpis" id="sparesKpis"></div>
     <div class="filters" id="sparesFilters"></div>
     <div class="tablewrap"><table id="sparesTbl"><thead></thead><tbody></tbody></table></div>
@@ -745,6 +752,7 @@ function _lsGet(k){try{return localStorage['getItem'](k);}catch(e){return null;}
 const DCOLS_DEF=[
  {k:'project',h:'Project'},
  {k:'div_ref',h:'Div. Ref',cls:'desc-cell'},
+ {k:'act_id',h:'Activity ID'},
  {k:'po_no',h:'PO No.'},
  {k:'subpo_no',h:'Sub-PO No.'},
  {k:'po_status',h:'PO Status',opts:['','Not Issued','Issued','Cancelled']},
@@ -899,7 +907,6 @@ function renderDelivery(){
       `<label>Lead</label><select id="fLead"><option value="">All</option><option>LLI</option><option>GEN</option></select>`+
       `<label>Supplier</label><select id="fSup"><option value="">All</option>${dv('supplier').map(v=>`<option>${eh(v)}</option>`).join('')}</select>`+
       `<label>Delivery</label><select id="fDel"><option value="">All</option><option>Not Started</option><option>Partial</option><option>Delivered</option></select>`+
-      `<button id="addDelBtn" style="background:var(--success);color:#fff;border:none;padding:7px 13px;border-radius:6px;cursor:pointer;font-weight:600">+ Add PO line</button>`+
       `<button id="delXlsBtn" style="background:var(--primary);color:#fff;border:none;padding:7px 13px;border-radius:6px;cursor:pointer;font-weight:600">⤓ Export XLS</button>`+
       `<button id="colMgrBtn" style="background:var(--primary-light);color:#fff;border:none;padding:7px 13px;border-radius:6px;cursor:pointer;font-weight:600">&#9881; Columns</button>`+`<button id="delClrBtn" style="background:#eef1f5;color:var(--text);border:1px solid var(--border);padding:7px 13px;border-radius:6px;cursor:pointer;font-weight:600">Clear filters</button><span class="count-pill" id="delCount"></span>`;
     f.dataset.built=1;
@@ -909,7 +916,6 @@ function renderDelivery(){
     document.getElementById('fLead').onchange=e=>{delState.lead_type=e.target.value;renderDelTable();};
     document.getElementById('fSup').onchange=e=>{delState.supplier=e.target.value;renderDelTable();};
     document.getElementById('fDel').onchange=e=>{delState.delivery=e.target.value;renderDelTable();};
-    document.getElementById('addDelBtn').onclick=addDelivery;
     document.getElementById('delXlsBtn').onclick=exportDelXls;
     document.getElementById('delClrBtn').onclick=clearDelFilters;
     document.getElementById('colMgrBtn').onclick=openColMgr;
@@ -969,7 +975,7 @@ function gridBind(adm){
   }
 }
 
-function openColMgr(){if(!ensureAdmin())return;buildColMgr();document.getElementById('colCloseBtn').onclick=closeColMgr;document.getElementById('colModal').classList.add('show');}
+function openColMgr(){buildColMgr();document.getElementById('colCloseBtn').onclick=closeColMgr;document.getElementById('colModal').classList.add('show');}
 function closeColMgr(){document.getElementById('colModal').classList.remove('show');}
 function buildColMgr(){const body=document.getElementById('colMgrBody');
   body.innerHTML=DCOLS_ALL.map((c,i)=>'<div class="colrow"><label><input type="checkbox" data-i="'+i+'" '+(c.hidden?'':'checked')+'> '+eh(c.h)+'</label>'+(c.custom?'<button class="colrm" data-i="'+i+'" title="Remove column">&#10005;</button>':'<span class="colfix">default</span>')+'</div>').join('');
@@ -987,6 +993,7 @@ function parseDeliveryWB(wb){
   hdr.forEach(function(h,ci){
     if(h==='project')map[ci]='project';
     else if(h==='div. ref'||h==='div ref'||h==='sow')map[ci]='div_ref';
+    else if(h==='activity id'||h==='activity'||h==='act id'||h==='act. id'||h==='activity_id'||h==='activity ids')map[ci]='act_id';
     else if(h==='po no.'||h==='po no')map[ci]='po_no';
     else if(h==='sub-po no.'||h==='sub-po no'||h==='sub po no.')map[ci]='subpo_no';
     else if(h==='po status')map[ci]='po_status';
@@ -1103,8 +1110,10 @@ function openDelTracker(id){
   steps+=trkStage('mir','Material Inspection On Site',s5,t5,d5);
   var mat=eh(_trkv(rec.material))||'(no description)';
   var head='<div class="trk-head"><strong>'+mat+'</strong>'+( _trkv(rec.project)?' &middot; '+eh(_trkv(rec.project)):'')+( _trkv(rec.qty)?' &middot; Qty '+eh(_trkv(rec.qty)):'')+'</div>';
+  var FLDS=[['project','Project'],['div_ref','Div. Ref'],['act_id','Activity ID'],['po_no','PO No.'],['subpo_no','Sub-PO No.'],['po_status','PO Status'],['po_plan_date','PO Planned Issue'],['po_actual_date','PO Actual Issue'],['qty','QTY'],['pqd_no','PQD No.'],['pqd_status','PQD Status'],['mar_no','MAR No.'],['mar_status','MAR Status'],['lead_type','Lead Time'],['supplier','Supplier'],['fat','FAT'],['spare','Spare Part'],['origin','Country of Origin'],['baseline_eta','Baseline ETA'],['eta','ETA'],['fab','Fabrication / Material Readiness'],['shipping','Shipping'],['delivery','Delivery'],['mir','MIR']];
+  var det='<div style="display:grid;grid-template-columns:1fr 1fr;gap:1px 16px">'+FLDS.map(function(f){var v=_trkv(rec[f[0]]);return '<div style="display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid var(--border);padding:3px 0;font-size:11.5px"><span style="color:var(--text-muted);font-weight:600">'+f[1]+'</span><span style="font-weight:600;text-align:right;word-break:break-word">'+(v?eh(v):'—')+'</span></div>';}).join('')+'</div>';
   document.getElementById('trkTitle').textContent='Material Status Tracker';
-  document.getElementById('trkBody').innerHTML=head+steps;
+  document.getElementById('trkBody').innerHTML=head+'<style>#trkBody .trk-dot{width:30px;height:30px}#trkBody .trk-dot svg{width:15px;height:15px}#trkBody .trk-line{min-height:10px}#trkBody .trk-body{padding:1px 0 7px}#trkBody .trk-name{font-size:12.5px}#trkBody .trk-step{padding-bottom:2px}#trkBody .trk-rail{flex:0 0 34px}.trk-sec{font-weight:700;color:var(--primary);margin:0 0 6px;font-size:13px}body.dark .trk-sec{color:#7fe6f0}</style><div style="display:flex;gap:26px;align-items:flex-start;flex-wrap:wrap"><div style="flex:1 1 380px;min-width:300px"><div class="trk-sec">Material details</div>'+det+'</div><div style="flex:0 0 300px;min-width:260px"><div class="trk-sec">Status tracker</div>'+steps+'</div></div>';
   document.getElementById('trkModal').classList.add('show');
 }
 function closeTrk(){var m=document.getElementById('trkModal');if(m)m.classList.remove('show');}
@@ -1116,7 +1125,7 @@ function renderDelTable(){
   document.querySelector('#delTbl thead').innerHTML='<tr><th>SL</th>'+DCOLS.map(c=>`<th data-sortk="${c.k}" style="cursor:pointer" title="Sort">${c.h}${arr(c.k)}</th>`).join('')+(adm?'<th></th>':'')+'</tr>';
   document.querySelectorAll('#delTbl thead th[data-sortk]').forEach(th=>th.onclick=()=>{const k=th.dataset.sortk;if(delState.sortKey===k){delState.sortDir=(delState.sortDir||1)*-1;}else{delState.sortKey=k;delState.sortDir=1;}renderDelTable();});
   if(!rows.length){
-    document.querySelector('#delTbl tbody').innerHTML=`<tr><td colspan="${DCOLS.length+1+(adm?1:0)}" style="text-align:center;color:var(--text-muted);padding:20px">No lines match the filter. ${adm?'Or click <b>+ Add PO line</b>.':'Unlock Admin (top-right) to add lines.'}</td></tr>`;
+    document.querySelector('#delTbl tbody').innerHTML=`<tr><td colspan="${DCOLS.length+1+(adm?1:0)}" style="text-align:center;color:var(--text-muted);padding:20px">No lines match the filter.</td></tr>`;
   } else {
     document.querySelector('#delTbl tbody').innerHTML=rows.map((r,idx)=>{
       return '<tr data-id="'+r._id+'"><td class="sltrk" title="Double-click this PO line for the material status tracker" style="font-weight:600;color:var(--primary);cursor:pointer">'+(idx+1)+'</td>'+
@@ -1252,40 +1261,55 @@ function saveShareable(){
   else doExport();
 }
 
-var LA_F="all";
+var LA_F="all";var LA_H=14;
 function renderLookahead(){
   var wrap=document.getElementById('laWrap'); if(!wrap)return;
+  var HZ=(LA_H===7?7:14);
   var today=new Date(); today.setHours(0,0,0,0);
-  var end=new Date(today.getTime()+13*864e5);
+  var end=new Date(today.getTime()+(HZ-1)*864e5);
   function laDate(v){v=(v==null?'':String(v)).trim();var m=v.match(/(\d{4})-(\d{2})-(\d{2})/);if(!m)return null;var d=new Date(+m[1],+m[2]-1,+m[3]);return isNaN(d.getTime())?null:d;}
   function dd(a){return Math.round((a-today)/864e5);}
   function fmt(d){var mo=('0'+(d.getMonth()+1)).slice(-2),da=('0'+d.getDate()).slice(-2);return d.getFullYear()+'-'+mo+'-'+da;}
   var W=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
   var evts=[];
-  DELV.forEach(function(r){
-    var st=(r.po_status||'').trim().toLowerCase();
-    if(st!=='issued'&&st!=='cancelled'){var d=laDate(r.po_plan_date);if(d)evts.push({d:d,type:'PO Issuance',r:r,stat:(r.po_status||'Not Issued')});}
-    var dl=(r.delivery||'').trim().toLowerCase();
-    if(dl!=='delivered'){var e=laDate(r.eta)||laDate(r.baseline_eta);if(e)evts.push({d:e,type:'Material ETA',r:r,stat:(r.delivery||'Not Started')});}
+  BASELINE.forEach(function(a){
+    if(!a.finish)return; var d=laDate(a.finish); if(!d)return; var n=dd(d);
+    var act=+(a.act||0);
+    if(n<0&&act>=100)return;
+    if(n<-14||n>(HZ-1))return;
+    var plan=a.w?+(a.planw/a.w*100).toFixed(1):0;
+    var info=(typeof AIDINFO!=='undefined'&&AIDINFO[a.aid])?AIDINFO[a.aid]:{};
+    evts.push({d:d,aid:a.aid,stage:(STLBL[a.stage]||a.stage),plan:plan,act:act,scope:info.boq||''});
   });
-  evts=evts.filter(function(x){var n=dd(x.d);return n>=-14&&n<=13;});
+  if(!evts.length){
+    DELV.forEach(function(r){
+      var dl=(r.delivery||'').trim().toLowerCase();
+      if(dl!=='delivered'){var e=laDate(r.eta)||laDate(r.baseline_eta);if(e){var n=dd(e);if(n>=-14&&n<=(HZ-1))evts.push({d:e,aid:(r.act_id||''),stage:'Delivery',scope:(r.material||''),plan:null,act:null,extra:(r.delivery||'Not Started')});}}
+      var st=(r.po_status||'').trim().toLowerCase();
+      if(st!=='issued'&&st!=='cancelled'){var d2=laDate(r.po_plan_date);if(d2){var n2=dd(d2);if(n2>=-14&&n2<=(HZ-1))evts.push({d:d2,aid:(r.act_id||''),stage:'PO Issuance',scope:(r.material||''),plan:null,act:null,extra:(r.po_status||'Not Issued')});}}
+    });
+  }
   evts.sort(function(a,b){return a.d-b.d;});
   var over=evts.filter(function(x){return dd(x.d)<0;});
   var wk1=evts.filter(function(x){var n=dd(x.d);return n>=0&&n<=6;});
-  var wk2=evts.filter(function(x){var n=dd(x.d);return n>=7&&n<=13;});
-  var head='<div class="la-window">Look-ahead window: <b>'+fmt(today)+'</b> &rarr; <b>'+fmt(end)+'</b> &middot; recalculated from today each time the report opens.</div>';
+  var wk2=evts.filter(function(x){var n=dd(x.d);return n>=7&&n<=(HZ-1);});
+  var tabs='<div class="dptabs" style="margin-bottom:10px"><div class="dptab'+(HZ===7?' active':'')+'" data-hz="7">One Week Look Ahead</div><div class="dptab'+(HZ===14?' active':'')+'" data-hz="14">Two Week Look Ahead</div></div>';
+  var head=tabs+'<div class="la-window">Baseline-finish look-ahead ('+(HZ===7?'1 week':'2 weeks')+') from <b>Procurement Progress Tracking</b>: <b>'+fmt(today)+'</b> &rarr; <b>'+fmt(end)+'</b> &middot; recalculated from today each open.</div>';
   var kpi=function(l,n,c,k){return '<div class="kpi kpibtn '+c+(LA_F===k?' active':'')+'" data-laf="'+k+'" title="Click to filter"><div class="lbl">'+l+'</div><div class="val">'+n+'</div></div>';};
-  var kpis='<div class="kpis">'+kpi('Overdue (last 14d)',over.length,'bad','over')+kpi('This week (0–7d)',wk1.length,'acc','wk1')+kpi('Next week (8–14d)',wk2.length,'warn','wk2')+kpi('Look-ahead total',wk1.length+wk2.length,'good','fwd')+'</div>';
+  var kpis='<div class="kpis">'+kpi('Overdue (last 14d)',over.length,'bad','over')+kpi('This week (0–7d)',wk1.length,'acc','wk1')+(HZ===14?kpi('Next week (8–14d)',wk2.length,'warn','wk2'):'')+kpi('Look-ahead total',wk1.length+wk2.length,'good','fwd')+'</div>';
   function rowHtml(x){var n=dd(x.d);var when=n<0?('<span class="chip red">Overdue '+(-n)+'d</span>'):(n===0?'<span class="chip amber">Today</span>':'<span class="chip green">In '+n+'d</span>');
-    var typ=x.type==='PO Issuance'?'<span class="chip blue">PO Issuance</span>':'<span class="chip gray">Material ETA</span>';
-    return '<tr><td style="white-space:nowrap">'+fmt(x.d)+'</td><td>'+W[x.d.getDay()]+'</td><td>'+when+'</td><td>'+typ+'</td><td>'+eh(x.r.project||'')+'</td><td class="desc-cell">'+eh(x.r.material||'')+'</td><td>'+eh(x.r.po_no||'')+'</td><td>'+eh(x.r.supplier||'')+'</td><td>'+eh(x.stat||'')+'</td></tr>';}
+    var planCell,actCell,lastCell;
+    if(x.plan==null){planCell='—';actCell='—';lastCell='<span class="chip gray">'+eh(x.extra||'')+'</span>';}
+    else{planCell=x.plan+'%';actCell=x.act+'%';var delay=+(x.plan-x.act).toFixed(1);lastCell=delay>0?('<span class="chip red">-'+delay+'%</span>'):('<span class="chip green">+'+Math.abs(delay)+'%</span>');}
+    return '<tr><td style="white-space:nowrap">'+fmt(x.d)+'</td><td>'+W[x.d.getDay()]+'</td><td>'+when+'</td><td style="white-space:nowrap;font-weight:600">'+eh(x.aid||'—')+'</td><td>'+eh(x.stage)+'</td><td class="desc-cell">'+eh(x.scope||'')+'</td><td data-num>'+planCell+'</td><td data-num>'+actCell+'</td><td data-num>'+lastCell+'</td></tr>';}
   function grp(title,arr,color){if(!arr.length)return '';return '<tr class="la-grp" style="background:'+color+'"><td colspan="9">'+title+' — '+arr.length+'</td></tr>'+arr.map(rowHtml).join('');}
   var sO=(LA_F==='all'||LA_F==='over'),s1=(LA_F==='all'||LA_F==='wk1'||LA_F==='fwd'),s2=(LA_F==='all'||LA_F==='wk2'||LA_F==='fwd');
-  var body=(sO?grp('Overdue — last 14 days (still open)',over,'#c0392b'):'')+(s1?grp('This week',wk1,'var(--primary)'):'')+(s2?grp('Next week',wk2,'#0e7c8a'):'');
-  if(!evts.length)body='<tr><td colspan="9" style="text-align:center;color:var(--text-muted);padding:22px">Nothing due in the next two weeks. ✓</td></tr>';
+  var body=(sO?grp('Overdue — last 14 days (behind, still open)',over,'#c0392b'):'')+(s1?grp('This week',wk1,'var(--primary)'):'')+(s2?grp('Next week',wk2,'#0e7c8a'):'');
+  if(!evts.length)body='<tr><td colspan="9" style="text-align:center;color:var(--text-muted);padding:22px">Nothing due in this window.</td></tr>';
   else if(!body)body='<tr><td colspan="9" style="text-align:center;color:var(--text-muted);padding:18px">No items in this filter — click the highlighted card again to show all.</td></tr>';
-  wrap.innerHTML=head+kpis+'<div class="tablewrap"><table id="laTbl"><thead><tr><th>Date</th><th>Day</th><th>When</th><th>Event</th><th>Project</th><th>Material</th><th>PO No.</th><th>Supplier</th><th>Status</th></tr></thead><tbody>'+body+'</tbody></table></div>';
+  wrap.innerHTML=head+kpis+'<div class="tablewrap"><table id="laTbl"><thead><tr><th>BL Finish</th><th>Day</th><th>When</th><th>Activity ID</th><th>Stage</th><th>Scope / Mapping</th><th>Plan %</th><th>Actual %</th><th>Delay</th></tr></thead><tbody>'+body+'</tbody></table></div>';
   wrap.querySelectorAll('.kpi[data-laf]').forEach(function(el){el.onclick=function(){var k=el.dataset.laf;LA_F=(LA_F===k?'all':k);renderLookahead();};});
+  wrap.querySelectorAll('.dptab[data-hz]').forEach(function(el){el.onclick=function(){LA_H=+el.dataset.hz;LA_F='all';renderLookahead();};});
 }
 
 function renderStageRecovery(){
@@ -1412,25 +1436,37 @@ function renderSpares(){
 const STAGE_SEG={MTS:'p_sub',MTA:'p_app',MPO:'p_po',MTD:'p_del'};
 const STAGE_NAME={MTS:'MT Submission',MTA:'MT Approval',MPO:'PO Placement',MTD:'MT Delivery'};
 const AID_RE=/([A-Z]{2,4})\.([A-Z]{2,4})\.([A-Z0-9]{2,5})\.(MTS|MTA|MPO|MTD)\.([0-9]+)/;
+function _finStr(v){
+  if(v==null||v==='')return '';
+  if(v instanceof Date && !isNaN(v.getTime())) return v.getFullYear()+'-'+('0'+(v.getMonth()+1)).slice(-2)+'-'+('0'+v.getDate()).slice(-2);
+  var s=String(v).trim();
+  var m=s.match(/(\d{4})-(\d{1,2})-(\d{1,2})/); if(m)return m[1]+'-'+('0'+m[2]).slice(-2)+'-'+('0'+m[3]).slice(-2);
+  var mo={jan:1,feb:2,mar:3,apr:4,may:5,jun:6,jul:7,aug:8,sep:9,oct:10,nov:11,dec:12};
+  var mm=s.match(/^(\d{1,2})[-\/ ]([A-Za-z]{3,})[-\/ ](\d{2,4})$/);
+  if(mm){var mn=mo[mm[2].slice(0,3).toLowerCase()]; if(mn){var y=+mm[3]; if(y<100)y+=2000; return y+'-'+('0'+mn).slice(-2)+'-'+('0'+(+mm[1])).slice(-2);}}
+  var num=parseFloat(s); if(!isNaN(num)&&num>20000&&num<80000){var dt=new Date(Date.UTC(1899,11,30)+Math.round(num)*864e5); return dt.getUTCFullYear()+'-'+('0'+(dt.getUTCMonth()+1)).slice(-2)+'-'+('0'+dt.getUTCDate()).slice(-2);}
+  return '';
+}
 function loadPlanning(file,srcName,silent){
   if(!file) return;
   if(typeof XLSX==='undefined'){return;}
   const rd=new FileReader();
   rd.onload=ev=>{
     try{
-      const wb=XLSX.read(new Uint8Array(ev.target.result),{type:'array'});
+      const wb=XLSX.read(new Uint8Array(ev.target.result),{type:'array',cellDates:true});
       let recs=[], sawWeight=false;
       wb.SheetNames.forEach(sn=>{
         const aoa=XLSX.utils.sheet_to_json(wb.Sheets[sn],{header:1,raw:true,defval:null});
-        let hRow=-1,aidC=-1,wC=-1,planC=-1,actC=-1;
+        let hRow=-1,aidC=-1,wC=-1,planC=-1,actC=-1,finC=-1;
         for(let r=0;r<Math.min(aoa.length,25);r++){
-          const row=aoa[r]||[];let aid=-1,w=-1,pl=-1,ac=-1;
+          const row=aoa[r]||[];let aid=-1,w=-1,pl=-1,ac=-1,fin=-1;
           row.forEach((c,ci)=>{ if(typeof c!=='string')return; const x=c.toLowerCase().trim();
             if(aid<0&&x.indexOf('activity id')>=0)aid=ci;
             if(w<0&&x.indexOf('weight')>=0)w=ci;
             if(pl<0&&x.indexOf('plan')>=0)pl=ci;
+            if(fin<0&&x.indexOf('finish')>=0)fin=ci;
             if(ac<0&&x.indexOf('actual')>=0&&x.indexOf('prev')<0)ac=ci; });
-          if(aid>=0){hRow=r;aidC=aid;wC=w;planC=pl;actC=ac;break;}
+          if(aid>=0){hRow=r;aidC=aid;wC=w;planC=pl;actC=ac;finC=fin;break;}
         }
         if(actC<0&&hRow>=0){(aoa[hRow]||[]).forEach((c,ci)=>{ if(typeof c==='string'){const x=c.toLowerCase();
           if(actC<0&&(x.indexOf('reported')>=0||(x.indexOf('progress')>=0&&x.indexOf('consultant')<0&&x.indexOf('plan')<0&&x.indexOf('prev')<0)))actC=ci; }});}
@@ -1447,7 +1483,7 @@ function loadPlanning(file,srcName,silent){
           let actNum=null; if(av!=null&&av!==''){const f=parseFloat(String(av).replace('%',''));if(!isNaN(f))actNum=f;}
           let wv=(wC>=0)?parseFloat(row[wC]):NaN; if(!isNaN(wv))sawWeight=true;
           let pv=(planC>=0)?parseFloat(row[planC]):NaN;
-          recs.push({aid:m[0],stage:STAGE_SEG[m[4]],w:isNaN(wv)?null:wv,plan:isNaN(pv)?null:pv,act:actNum});
+          var fv=(finC>=0?_finStr(row[finC]):''); recs.push({aid:m[0],stage:STAGE_SEG[m[4]],w:isNaN(wv)?null:wv,plan:isNaN(pv)?null:pv,act:actNum,finish:fv});
         }
       });
       if(!recs.length){if(!silent)alert('No procurement Activity IDs were found (expected IDs like PR.RO.D07.MTS.1030).');return;}
@@ -1458,10 +1494,10 @@ function loadPlanning(file,srcName,silent){
       if(sawWeight){
         const tot=list.reduce((s,p)=>s+(p.w||0),0)||1;
         BASELINE.length=0;
-        list.forEach(p=>{const wn=(p.w||0)/tot; BASELINE.push({aid:p.aid,stage:p.stage,w:wn,planw:wn*((p.plan||0)*fac/100),act:+((p.act!=null?p.act:0)*fac).toFixed(2)});});
+        list.forEach(p=>{const wn=(p.w||0)/tot; BASELINE.push({aid:p.aid,stage:p.stage,w:wn,planw:wn*((p.plan||0)*fac/100),act:+((p.act!=null?p.act:0)*fac).toFixed(2),finish:p.finish||''});});
         rebuilt=true;
       } else {
-        list.forEach(p=>{ if(p.act==null)return; const ba=BASELINE.find(x=>x.aid===p.aid); if(ba)ba.act=+(p.act*fac).toFixed(2);});
+        list.forEach(p=>{ const ba=BASELINE.find(x=>x.aid===p.aid); if(!ba)return; if(p.act!=null)ba.act=+(p.act*fac).toFixed(2); if(p.finish)ba.finish=p.finish;});
       }
       _lsSet('kafd_baseline',JSON.stringify(BASELINE));
       let hits=0; list.forEach(p=>{ if(p.act==null)return; const v=Math.max(0,Math.min(100,+(p.act*fac).toFixed(1))); DATA.forEach(it=>{ if(it.activity_ids&&it.activity_ids.indexOf(p.aid)>=0){it[p.stage]=v;hits++;} });});
