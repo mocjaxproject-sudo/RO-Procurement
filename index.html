@@ -1055,6 +1055,15 @@ function _idbOpen(){return new Promise(function(res,rej){var r=indexedDB.open('k
 function idbSet(k,v){return _idbOpen().then(function(db){return new Promise(function(res,rej){var tx=db.transaction('h','readwrite');tx.objectStore('h').put(v,k);tx.oncomplete=function(){res();};tx.onerror=function(){rej(tx.error);};});});}
 function idbGet(k){return _idbOpen().then(function(db){return new Promise(function(res,rej){var tx=db.transaction('h','readonly');var rq=tx.objectStore('h').get(k);rq.onsuccess=function(){res(rq.result);};rq.onerror=function(){rej(rq.error);};});});}
 function applyDeliveryImportSilent(rows){if(!rows||!rows.length)return false;DELV=rows;delSave();var f=document.getElementById('delFilters');if(f)f.dataset.built='';renderDelivery();return true;}
+function autoLoadDelivery(){
+  if(typeof XLSX==='undefined')return;
+  try{
+    fetch('KAFD00330_Delivery_Master.xlsx',{cache:'no-store'})
+      .then(function(r){if(!r.ok)throw 0;return r.arrayBuffer();})
+      .then(function(buf){var wb=XLSX.read(new Uint8Array(buf),{type:'array',cellDates:true});var rows=parseDeliveryWB(wb);if(rows&&rows.length){applyDeliveryImportSilent(rows);updateLiveChip&&updateLiveChip();}})
+      .catch(function(){});
+  }catch(e){}
+}
 async function linkMaster(){
   if(!ensureAdmin())return;
   if(!window.showOpenFilePicker){alert('One-click linking needs Chrome or Edge. Use Option 1 (choose the Excel file) instead.');return;}
@@ -1539,6 +1548,7 @@ function loadPlanning(file,srcName,silent){
 var _pf=document.getElementById('planFile'); if(_pf)_pf.onchange=function(ev0){var f=ev0.target.files[0]; if(f)loadPlanning(f,f.name,false);};
 function autoLoadPlanning(){ if(typeof XLSX==='undefined')return; try{ fetch('Procurement%20Progress%20Tracking.xlsx',{cache:'no-store'}).then(function(r){if(!r.ok)throw 0;return r.blob();}).then(function(b){ loadPlanning(b,'Procurement Progress Tracking.xlsx',true); }).catch(function(){}); }catch(e){} }
 autoLoadPlanning();
+autoLoadDelivery();
 
 function setProj(p){PROJ=p;try{localStorage.setItem('kafd_proj',p);}catch(e){}var f=document.getElementById('delFilters');if(f)f.dataset.built='';renderDelivery();}
 document.querySelectorAll('.dptab').forEach(function(pt){pt.onclick=function(){setProj(pt.dataset.proj);};});
