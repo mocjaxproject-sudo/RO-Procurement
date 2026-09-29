@@ -229,6 +229,11 @@ footer{color:var(--text-muted);font-size:11px;text-align:center;padding:18px;bor
   table{width:100%!important}
   thead{display:table-header-group}
   tr,td,th{break-inside:avoid}
+  body{font-size:10px}
+  table{font-size:8.5px!important}
+  th,td{padding:3px 5px!important}
+  .kpi .val{font-size:17px}
+  .chartwrap{height:220px!important}
   @page{size:A3 landscape;margin:8mm}
 }
 .kpi.kpibtn{cursor:pointer}
@@ -1329,19 +1334,11 @@ function renderLookahead(){
 }
 
 function printView(){
-  var v=document.querySelector('.view.active'); if(!v){window.print();return;}
-  var prevH=v.style.height, prevZoom=v.style.zoom;
-  if(v.id==='view-delivery')v.style.height='auto';
-  setTimeout(function(){
-    var cw=v.scrollWidth||v.offsetWidth, ch=v.scrollHeight||v.offsetHeight;
-    var pw=1480, ph=1000; /* approx A3 landscape printable area in px @96dpi */
-    var s=Math.min(pw/(cw||1), ph/(ch||1), 1);
-    try{v.style.zoom=s;}catch(e){}
-    setTimeout(function(){window.print();},90);
-  },60);
-  var done=function(){try{v.style.zoom=prevZoom||'';v.style.height=prevH||'';}catch(e){}window.removeEventListener('afterprint',done);};
-  window.addEventListener('afterprint',done);
-  setTimeout(done,6000);
+  var v=document.querySelector('.view.active');
+  var prevH=v?v.style.height:'';
+  if(v&&v.id==='view-delivery')v.style.height='auto';
+  try{window.print();}catch(e){}
+  if(v&&v.id==='view-delivery'){var done=function(){v.style.height=prevH||'';window.removeEventListener('afterprint',done);};window.addEventListener('afterprint',done);setTimeout(done,4000);}
 }
 function renderStageRecovery(){
   var tb=document.querySelector('#stageRecTbl tbody'); if(!tb)return;
