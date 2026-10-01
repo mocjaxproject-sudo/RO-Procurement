@@ -1086,8 +1086,14 @@ async function refreshFromLinked(silent){
 }
 
 var _linked=false;
-function updateLiveChip(){var c=document.getElementById('liveChip');if(!c)return;idbGet('delHandle').then(function(h){_linked=!!h;if(h){c.innerHTML='● Live';c.style.color='#aef5dc';c.style.background='#0c5a4a';c.title='Delivery is linked to '+h.name+' — click to refresh from it';}else{c.innerHTML='○ Link master';c.style.color='#fff';c.style.background='#ffffff1f';c.title='Click to link the Delivery master Excel';}}).catch(function(){});}
+function updateLiveChip(){var c=document.getElementById('liveChip');if(!c)return;if(location.protocol==='http:'||location.protocol==='https:'){c.innerHTML='● Live';c.style.color='#aef5dc';c.style.background='#0c5a4a';c.title='Auto-linked to the Excel files in the repository — click to refresh';return;}idbGet('delHandle').then(function(h){_linked=!!h;if(h){c.innerHTML='● Live';c.style.color='#aef5dc';c.style.background='#0c5a4a';c.title='Delivery is linked to '+h.name+' — click to refresh from it';}else{c.innerHTML='○ Link master';c.style.color='#fff';c.style.background='#ffffff1f';c.title='Click to link the Delivery master Excel';}}).catch(function(){});}
 function liveClick(){
+  if(location.protocol==='http:'||location.protocol==='https:'){
+    try{autoLoadPlanning&&autoLoadPlanning();}catch(e){}
+    try{autoLoadDelivery&&autoLoadDelivery();}catch(e){}
+    alert('Refreshed from the Excel files in the repository.');
+    return;
+  }
   if(!ensureAdmin())return;
   if(!window.showOpenFilePicker){ openSync(); return; }
   if(_linked){ refreshFromLinked(false).then(updateLiveChip); }
