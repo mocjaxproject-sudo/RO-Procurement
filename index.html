@@ -229,11 +229,7 @@ footer{color:var(--text-muted);font-size:11px;text-align:center;padding:18px;bor
   table{width:100%!important}
   thead{display:table-header-group}
   tr,td,th{break-inside:avoid}
-  body{font-size:10px}
-  table{font-size:8.5px!important}
-  th,td{padding:3px 5px!important}
-  .kpi .val{font-size:17px}
-  .chartwrap{height:220px!important}
+  th,td{padding:4px 7px}
   @page{size:A3 landscape;margin:8mm}
 }
 .kpi.kpibtn{cursor:pointer}
@@ -1126,11 +1122,11 @@ function openDelTracker(id){
   steps+=trkStage('po','PO Issuance',s1,t1,d1);
   // 2 Fabrication / Material Readiness
   var s2='pending',t2=fab||'Not started';
-  if(fab==='Completed'||fab==='Ready'){s2='done';} else if(fab==='In Progress'){s2='active';}
+  if(fab==='Ready'||fab==='Completed'){s2='done';} else if(fab==='Started'||fab==='In Progress'){s2='active';}
   steps+=trkStage('fab','Fabrication / Material Readiness',s2,t2,_trkv(rec.baseline_eta)?'Baseline ETA: '+_trkv(rec.baseline_eta):'');
   // 3 Shipping
   var s3='pending',t3=shp||'Not started';
-  if(shp==='Arrived'||shp==='Cleared'){s3='done';} else if(shp==='In Transit'){s3='active';}
+  if(shp==='Shipped'||shp==='Arrived'||shp==='Cleared'||shp==='Delivered'){s3='done';} else if(shp==='In Transit'){s3='active';}
   steps+=trkStage('ship','Shipping',s3,t3,_trkv(rec.eta)?'ETA: '+_trkv(rec.eta):'');
   // 4 Delivery
   var s4='pending',t4=dlv||'Not started';
@@ -1335,10 +1331,16 @@ function renderLookahead(){
 
 function printView(){
   var v=document.querySelector('.view.active');
-  var prevH=v?v.style.height:'';
-  if(v&&v.id==='view-delivery')v.style.height='auto';
-  try{window.print();}catch(e){}
-  if(v&&v.id==='view-delivery'){var done=function(){v.style.height=prevH||'';window.removeEventListener('afterprint',done);};window.addEventListener('afterprint',done);setTimeout(done,4000);}
+  var pz=v?v.style.zoom:'', ph2=v?v.style.height:'';
+  var done=function(){ if(v){v.style.zoom=pz||''; v.style.height=ph2||'';} window.removeEventListener('afterprint',done); };
+  window.addEventListener('afterprint',done);
+  if(v){ if(v.id==='view-delivery')v.style.height='auto';
+    var cw=v.scrollWidth||v.offsetWidth, ch=v.scrollHeight||v.offsetHeight;
+    var s=Math.min(1500/(cw||1), 1040/(ch||1), 1); if(!(s>0))s=1;
+    v.style.zoom=s;
+  }
+  try{ window.print(); }catch(e){}
+  setTimeout(done,4000);
 }
 function renderStageRecovery(){
   var tb=document.querySelector('#stageRecTbl tbody'); if(!tb)return;
