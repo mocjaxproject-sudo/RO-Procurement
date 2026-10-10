@@ -826,7 +826,7 @@ function delCell(r,c,ci){
   const v=r[c.k]==null?'':String(r[c.k]);
   if(c.k==='po_no'&&!v.trim())return '<td class="dcell" data-k="po_no" data-ci="'+ci+'" style="color:var(--text-muted);font-style:italic">Not Assigned</td>';
   const ec=v.trim()?'':' ec';
-  if(c.k==='mir'&&v.trim()){ var mb=eh(v).replace(/\s+(?=KAFD)/gi,'<br>'); return `<td class="dcell ${(c.cls||'')}" data-k="${c.k}" data-ci="${ci}">${mb}</td>`; }
+  if((c.k==='mir'||c.k==='pqd_no'||c.k==='mar_no')&&v.trim()){ var mb=eh(v).replace(/\s+(?=KAFD)/gi,'<br>'); return `<td class="dcell ${(c.cls||'')}" data-k="${c.k}" data-ci="${ci}">${mb}</td>`; }
   return `<td class="dcell ${(c.cls||'')}${ec}" data-k="${c.k}" data-ci="${ci}">${eh(v)}</td>`;
 }
 function delCmp(a,b,k,dir){
