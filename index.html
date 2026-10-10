@@ -1104,15 +1104,15 @@ function liveClick(){
 var TRK_ICONS={
  po:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg>',
  fab:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20"/><path d="M4 20V9l6 4V9l6 4V6l4-2v16"/></svg>',
- ship:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13l2-7h11l3 4h2v3"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/><path d="M9 18h6M3 13h16"/></svg>',
- del:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.7l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.7l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.3 7 12 12 20.7 7"/><line x1="12" y1="22" x2="12" y2="12"/></svg>',
- mir:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>'};
+ ship:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="5" width="13" height="11" rx="1"/><path d="M14 9h4l3 3v4h-7z"/><circle cx="6" cy="18.5" r="2"/><circle cx="18" cy="18.5" r="2"/></svg>',
+ del:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>',
+ mir:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-6"/><polyline points="9 11 12 14 22 4"/><line x1="7" y1="8" x2="10" y2="8"/><line x1="7" y1="16" x2="13" y2="16"/></svg>'};
 var TRK_CHK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
 function _trkv(v){return (v==null?'':String(v)).trim();}
 function trkStage(icon,name,state,statTxt,detail){
   var cls={done:'trk-done',active:'trk-active',pending:'trk-pending',bad:'trk-bad'}[state]||'trk-pending';
-  var ic=(state==='done')?TRK_CHK:TRK_ICONS[icon];
-  return '<div class="trk-step '+cls+'"><div class="trk-rail"><div class="trk-dot">'+ic+'</div><div class="trk-line"></div></div>'+
+  var ic=TRK_ICONS[icon]||TRK_CHK;
+  return '<div class="trk-step '+cls+'"><div class="trk-rail"><div class="trk-dot" data-ic="'+icon+'">'+ic+'</div><div class="trk-line"></div></div>'+
     '<div class="trk-body"><div class="trk-name">'+name+'</div><div class="trk-stat">'+statTxt+'</div>'+(detail?'<div class="trk-detail">'+detail+'</div>':'')+'</div></div>';
 }
 function openDelTracker(id){
@@ -1148,7 +1148,24 @@ function openDelTracker(id){
   var FLDS=[['project','Project'],['div_ref','Div. Ref'],['act_id','Activity ID'],['po_no','PO No.'],['subpo_no','Sub-PO No.'],['po_status','PO Status'],['po_plan_date','PO Planned Issue'],['po_actual_date','PO Actual Issue'],['qty','QTY'],['pqd_no','PQD No.'],['pqd_status','PQD Status'],['mar_no','MAR No.'],['mar_status','MAR Status'],['lead_type','Lead Time'],['supplier','Supplier'],['fat','FAT'],['spare','Spare Part'],['origin','Country of Origin'],['insurance','Marine Cargo Insurance'],['baseline_eta','Baseline ETA'],['eta','ETA'],['fab','Fabrication / Material Readiness'],['shipping','Shipping'],['delivery','Delivery'],['mir','MIR']];
   var det='<div style="display:grid;grid-template-columns:1fr 1fr;gap:1px 16px">'+FLDS.map(function(f){var v=_trkv(rec[f[0]]);return '<div style="display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid var(--border);padding:3px 0;font-size:11.5px"><span style="color:var(--text-muted);font-weight:600">'+f[1]+'</span><span style="font-weight:600;text-align:right;word-break:break-word">'+(v?eh(v):'—')+'</span></div>';}).join('')+'</div>';
   document.getElementById('trkTitle').textContent='Material Status Tracker';
-  document.getElementById('trkBody').innerHTML=head+'<style>#trkBody .trk-dot{width:30px;height:30px}#trkBody .trk-dot svg{width:15px;height:15px}#trkBody .trk-line{min-height:10px}#trkBody .trk-body{padding:1px 0 7px}#trkBody .trk-name{font-size:12.5px}#trkBody .trk-step{padding-bottom:2px}#trkBody .trk-rail{flex:0 0 34px}.trk-sec{font-weight:700;color:var(--primary);margin:0 0 6px;font-size:13px}body.dark .trk-sec{color:#7fe6f0}</style><div style="display:flex;gap:26px;align-items:flex-start;flex-wrap:wrap"><div style="flex:1 1 380px;min-width:300px"><div class="trk-sec">Material details</div>'+det+'</div><div style="flex:0 0 300px;min-width:260px"><div class="trk-sec">Status tracker</div>'+steps+'</div></div>';
+  document.getElementById('trkBody').innerHTML=head+'<style>'+
+    '#trkBody .trk-rail{flex:0 0 46px}'+
+    '#trkBody .trk-line{min-height:14px;width:5px;border-radius:3px}'+
+    '#trkBody .trk-body{padding:4px 0 14px}#trkBody .trk-name{font-size:12.5px}#trkBody .trk-step{padding-bottom:2px}'+
+    '#trkBody .trk-dot{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative;transform-style:preserve-3d;border:0;box-shadow:0 7px 15px rgba(0,0,0,.28),inset 0 -5px 9px rgba(0,0,0,.22),inset 0 5px 10px rgba(255,255,255,.4);animation:trkfloat 3s ease-in-out infinite}'+
+    '#trkBody .trk-dot svg{width:21px;height:21px;filter:drop-shadow(0 1px 1px rgba(0,0,0,.3))}'+
+    '#trkBody .trk-step.trk-done .trk-dot{background:radial-gradient(circle at 33% 27%,#4ae29a,#0f9d58);color:#fff}'+
+    '#trkBody .trk-step.trk-active .trk-dot{background:radial-gradient(circle at 33% 27%,#ffd874,#f59e0b);color:#4a3200;animation:trkfloat 2.4s ease-in-out infinite,trkglow 1.7s ease-in-out infinite}'+
+    '#trkBody .trk-step.trk-pending .trk-dot{background:radial-gradient(circle at 33% 27%,#d7dee7,#8995a4);color:#54616f}'+
+    '#trkBody .trk-step.trk-bad .trk-dot{background:radial-gradient(circle at 33% 27%,#ff8575,#dc2626);color:#fff}'+
+    '#trkBody .trk-step.trk-active .trk-dot[data-ic="ship"] svg{animation:trkdrive 1.5s ease-in-out infinite}'+
+    '#trkBody .trk-step.trk-active .trk-dot[data-ic="fab"] svg{animation:trkspin 5s linear infinite;transform-origin:50% 50%}'+
+    '@keyframes trkfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}'+
+    '@keyframes trkspin{to{transform:rotate(360deg)}}'+
+    '@keyframes trkdrive{0%,100%{transform:translateX(-3px)}50%{transform:translateX(3px)}}'+
+    '@keyframes trkglow{0%,100%{box-shadow:0 7px 15px rgba(0,0,0,.28),inset 0 -5px 9px rgba(0,0,0,.22),inset 0 5px 10px rgba(255,255,255,.4),0 0 0 0 rgba(245,158,11,.5)}50%{box-shadow:0 7px 15px rgba(0,0,0,.28),inset 0 -5px 9px rgba(0,0,0,.22),inset 0 5px 10px rgba(255,255,255,.4),0 0 0 10px rgba(245,158,11,0)}}'+
+    '@media(prefers-reduced-motion:reduce){#trkBody .trk-dot,#trkBody .trk-dot svg{animation:none!important}}'+
+    '.trk-sec{font-weight:700;color:var(--primary);margin:0 0 6px;font-size:13px}body.dark .trk-sec{color:#7fe6f0}</style><div style="display:flex;gap:26px;align-items:flex-start;flex-wrap:wrap"><div style="flex:1 1 380px;min-width:300px"><div class="trk-sec">Material details</div>'+det+'</div><div style="flex:0 0 300px;min-width:260px"><div class="trk-sec">Status tracker</div>'+steps+'</div></div>';
   document.getElementById('trkModal').classList.add('show');
 }
 function closeTrk(){var m=document.getElementById('trkModal');if(m)m.classList.remove('show');}
