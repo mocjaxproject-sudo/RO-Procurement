@@ -283,6 +283,10 @@ footer{color:var(--text-muted);font-size:11px;text-align:center;padding:18px;bor
 #view-delivery.active{display:flex;flex-direction:column;height:calc(100vh - 150px)}
 #view-delivery .note,#view-delivery #delProjTabs,#view-delivery #delKpis,#view-delivery #delFilters{flex:0 0 auto}
 #view-delivery .tablewrap{flex:1 1 auto;max-height:none}
+#view-lookahead.active{display:flex;flex-direction:column;height:calc(100vh - 165px)}
+#view-lookahead #laWrap{display:flex;flex-direction:column;flex:1 1 auto;min-height:0}
+#view-lookahead .dptabs,#view-lookahead .la-window,#view-lookahead .kpis,#view-lookahead .la-filters{flex:0 0 auto}
+#view-lookahead .tablewrap{flex:1 1 auto;max-height:none;min-height:0}
 #delTbl td.dcell{user-select:none}
 #delTbl td.dcell[contenteditable="true"]{user-select:text}
 #delTbl td.gsel{background:#d9eff1 !important}
@@ -474,7 +478,6 @@ body.dark .tot-row td{background:#10302e}
       <div id="colMgrBody" style="max-height:48vh;overflow:auto"></div>
       <div class="pomodal-actions"><button class="btn-cancel" id="colCloseBtn">Close</button></div>
     </div></div>
-    <div id="trkModal" class="pomodal" onclick="if(event.target===this)closeTrk()"><div class="pomodal-box" style="max-width:940px"><div class="pomodal-title" id="trkTitle">Material Status Tracker</div><div id="trkBody"></div><div class="pomodal-actions"><button class="btn-cancel" id="trkClose" onclick="closeTrk()">Close</button></div></div></div>
     <div id="syncModal" class="pomodal"><div class="pomodal-box" style="max-width:560px">
       <div class="pomodal-title">Update Delivery from Excel (OneDrive)</div>
       <div style="background:#e9f6f7;border:1px solid #b9e2e6;border-radius:8px;padding:11px 12px;margin-bottom:14px">
@@ -504,6 +507,7 @@ body.dark .tot-row td{background:#10302e}
     <div class="tablewrap"><table id="sparesTbl"><thead></thead><tbody></tbody></table></div>
   </section>
 </main>
+<div id="trkModal" class="pomodal" onclick="if(event.target===this)closeTrk()"><div class="pomodal-box" style="max-width:940px"><div class="pomodal-title" id="trkTitle">Material Status Tracker</div><div id="trkBody"></div><div class="pomodal-actions"><button class="btn-cancel" id="trkClose" onclick="closeTrk()">Close</button></div></div></div>
 
 <footer>Source: Dashboard-KAFD00330-Procurement.xlsx · baseline 2026-04-25 · Self-contained, works offline. Your edits are saved automatically in this browser.</footer>
 <div class="saved-flash" id="flash">Saved ✓</div>
@@ -1324,7 +1328,7 @@ function saveShareable(){
   else doExport();
 }
 
-var LA_F="all";var LA_H=14;
+var LA_F="all";var LA_H=14;var LA_MODE='list';var LA_TLF='all';var TL_F={mat:'',sup:'',po:''};
 function renderLookahead(){
   var wrap=document.getElementById('laWrap'); if(!wrap)return;
   var HZ=(LA_H===7?7:14);
@@ -1334,6 +1338,9 @@ function renderLookahead(){
   function dd(a){return Math.round((a-today)/864e5);}
   function fmt(d){var mo=('0'+(d.getMonth()+1)).slice(-2),da=('0'+d.getDate()).slice(-2);return d.getFullYear()+'-'+mo+'-'+da;}
   var W=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  var modeTabs='<div class="dptabs" style="margin-bottom:10px"><div class="dptab'+(LA_MODE==='list'?' active':'')+'" data-mode="list">List View</div><div class="dptab'+(LA_MODE==='timeline'?' active':'')+'" data-mode="timeline">Timeline Tracker</div></div>';
+  function bindModeTabs(){wrap.querySelectorAll('.dptab[data-mode]').forEach(function(el){el.onclick=function(){LA_MODE=el.dataset.mode;renderLookahead();};});}
+  if(LA_MODE==='timeline'){ renderLaTimeline(wrap,modeTabs,{today:today,laDate:laDate,dd:dd,fmt:fmt}); bindModeTabs(); return; }
   var evts=[];
   DELV.forEach(function(r){
     var d=laDate(r.eta); if(!d)return;
@@ -1346,7 +1353,7 @@ function renderLookahead(){
   var wk1=evts.filter(function(x){var n=dd(x.d);return n>=0&&n<=6;});
   var wk2=evts.filter(function(x){var n=dd(x.d);return n>=7&&n<=(HZ-1);});
   var tabs='<div class="dptabs" style="margin-bottom:10px"><div class="dptab'+(HZ===7?' active':'')+'" data-hz="7">One Week Look Ahead</div><div class="dptab'+(HZ===14?' active':'')+'" data-hz="14">Two Week Look Ahead</div></div>';
-  var head=tabs+'<div class="la-window">Material deliveries by <b>ETA</b> (from KAFD00330_Delivery_Master) — '+(HZ===7?'1 week':'2 weeks')+' window: <b>'+fmt(today)+'</b> &rarr; <b>'+fmt(end)+'</b> &middot; recalculated from today each open.</div>';
+  var head=modeTabs+tabs+'<div class="la-window">Material deliveries by <b>ETA</b> (from KAFD00330_Delivery_Master) — '+(HZ===7?'1 week':'2 weeks')+' window: <b>'+fmt(today)+'</b> &rarr; <b>'+fmt(end)+'</b> &middot; recalculated from today each open.</div>';
   var kpi=function(l,n,c,k){return '<div class="kpi kpibtn '+c+(LA_F===k?' active':'')+'" data-laf="'+k+'" title="Click to filter"><div class="lbl">'+l+'</div><div class="val">'+n+'</div></div>';};
   var kpis='<div class="kpis">'+kpi('Overdue (last 14d)',over.length,'bad','over')+kpi('This week (0–7d)',wk1.length,'acc','wk1')+(HZ===14?kpi('Next week (8–14d)',wk2.length,'warn','wk2'):'')+kpi('Look-ahead total',wk1.length+wk2.length,'good','fwd')+'</div>';
   function rowHtml(x){var r=x.r;var n=dd(x.d);var when=n<0?('<span class="chip red">Overdue '+(-n)+'d</span>'):(n===0?'<span class="chip amber">Today</span>':'<span class="chip green">In '+n+'d</span>');
@@ -1360,6 +1367,58 @@ function renderLookahead(){
   wrap.innerHTML=head+kpis+'<div class="tablewrap"><table id="laTbl"><thead><tr><th>ETA</th><th>Day</th><th>When</th><th>Project</th><th>Material</th><th>PO No.</th><th>Supplier</th><th>Delivery</th></tr></thead><tbody>'+body+'</tbody></table></div>';
   wrap.querySelectorAll('.kpi[data-laf]').forEach(function(el){el.onclick=function(){var k=el.dataset.laf;LA_F=(LA_F===k?'all':k);renderLookahead();};});
   wrap.querySelectorAll('.dptab[data-hz]').forEach(function(el){el.onclick=function(){LA_H=+el.dataset.hz;LA_F='all';renderLookahead();};});
+  bindModeTabs();
+}
+function renderLaTimeline(wrap,modeTabs,H){
+  var today=H.today,laDate=H.laDate,dd=H.dd,fmt=H.fmt;
+  function monday(d){var x=new Date(d.getTime());var k=(x.getDay()+6)%7;x.setDate(x.getDate()-k);x.setHours(0,0,0,0);return x;}
+  var MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  function wlabel(d){return d.getDate()+' '+MON[d.getMonth()];}
+  var items=[];
+  DELV.forEach(function(r){var d=laDate(r.eta); if(!d)return; items.push({d:d,ws:monday(d),r:r});});
+  if(!items.length){wrap.innerHTML=modeTabs+'<div class="la-window">No materials have an ETA in the Delivery data yet.</div>';return;}
+  items.sort(function(a,b){return a.d-b.d;});
+  var PS=new Date(2025,9,1);PS.setHours(0,0,0,0);var PE=new Date(2027,2,31);PE.setHours(0,0,0,0);
+  function satBefore(d){var x=new Date(d.getTime());x.setDate(x.getDate()-((x.getDay()+1)%7));x.setHours(0,0,0,0);return x;}
+  var GA=satBefore(PS);
+  var weeks=[];var ws0=new Date(GA.getTime()),idx=1;
+  while(ws0.getTime()<=PE.getTime()){var we=new Date(ws0.getTime()+6*864e5);weeks.push({i:idx,s:new Date(ws0.getTime()),e:we});ws0=new Date(ws0.getTime()+7*864e5);idx++;}
+  function wkIndexOf(d){var diff=Math.floor((d.getTime()-GA.getTime())/(7*864e5));if(diff<0)diff=0;if(diff>weeks.length-1)diff=weeks.length-1;return diff;}
+  function inWk(wk){return today.getTime()>=wk.s.getTime()&&today.getTime()<=wk.e.getTime();}
+  var startIdx=(today.getTime()<PS.getTime())?0:wkIndexOf(today);
+  var vweeks=weeks.slice(startIdx);
+  items.forEach(function(x){var dv=(x.r.delivery||'').trim();var n=dd(x.d);x.n=n;x.state=/deliver/i.test(dv)?'done':(n<0?'bad':(n<=6?'active':'pending'));});
+  var nOver=0,nWk=0,nUp=0,nDone=0;
+  items.forEach(function(x){if(x.state==='bad')nOver++;else if(x.state==='active')nWk++;else if(x.state==='pending')nUp++;else nDone++;});
+  var FMAP={over:'bad',wk:'active',up:'pending',done:'done'};
+  var vis=(LA_TLF==='all')?items:items.filter(function(x){return x.state===FMAP[LA_TLF];});
+  var th='<th>Project</th><th>PO No.</th><th>Supplier</th><th class="tl-mat">Material</th><th>ETA</th>';
+  vweeks.forEach(function(wk){var isc=inWk(wk);th+='<th class="tl-wk'+(isc?' tl-now':'')+'"><div class="tl-wkno">Week '+wk.i+'</div><div class="tl-wkdt">'+wlabel(wk.s)+' – '+wlabel(wk.e)+'</div>'+(isc?'<div class="tl-wknow">THIS WEEK</div>':'')+'</th>';});
+  var ncol=vweeks.length+5;
+  var rows=vis.map(function(x){var r=x.r;var n=x.n;var state=x.state;
+    var cls={done:'tl-done',bad:'tl-bad',active:'tl-act',pending:'tl-pend'}[state];
+    var lbl=state==='done'?'Delivered':(state==='bad'?('Overdue '+(-n)+'d'):fmt(x.d));
+    var pill='<div class="tl-pill '+cls+'" title="'+fmt(x.d)+'">'+lbl+'</div>';
+    var vi=Math.max(wkIndexOf(x.d),startIdx)-startIdx;
+    var tds='';vweeks.forEach(function(wk,ci){var hit=(ci===vi);tds+='<td class="tl-cell'+(hit?' tl-hit':'')+(inWk(wk)?' tl-nowcol':'')+'">'+(hit?pill:'')+'</td>';});
+    return '<tr data-id="'+(r._id||'')+'" data-mat="'+(r.material||'').toLowerCase().replace(/"/g,'')+'" data-sup="'+(r.supplier||'').toLowerCase().replace(/"/g,'')+'" data-po="'+(r.po_no||'').toLowerCase().replace(/"/g,'')+'"><td>'+eh(r.project||'')+'</td><td>'+eh(r.po_no||'')+'</td><td>'+eh(r.supplier||'')+'</td><td class="tl-mat desc-cell" style="cursor:pointer;color:var(--primary);font-weight:600" title="Double-click for Material Status Tracker">'+eh(r.material||'')+'</td><td style="white-space:nowrap">'+fmt(x.d)+'</td>'+tds+'</tr>';
+  }).join('');
+  if(!vis.length)rows='<tr><td colspan="'+ncol+'" style="text-align:center;color:var(--text-muted);padding:18px">No materials in this filter — click the highlighted card again to show all.</td></tr>';
+  var legend='<div class="la-window" style="margin-top:10px;margin-bottom:0">Weekly delivery timeline — every material plotted in its <b>ETA</b> week (weeks run Saturday–Friday), recalculated from today. Click a card to filter. <span class="chip red">Overdue</span> <span class="chip amber">This week</span> <span class="chip teal" style="background:#0e7c8a;color:#fff">Upcoming</span> <span class="chip green">Delivered</span></div>';
+  var kc=function(l,n,c,k){return '<div class="kpi kpibtn '+c+(LA_TLF===k?' active':'')+'" data-tlf="'+k+'" title="Click to filter"><div class="lbl">'+l+'</div><div class="val">'+n+'</div></div>';};
+  var kpis='<div class="kpis">'+kc('Overdue',nOver,'bad','over')+kc('This week',nWk,'acc','wk')+kc('Upcoming',nUp,'warn','up')+kc('Delivered',nDone,'good','done')+'</div>';
+  var style='<style>#laTl{border-collapse:collapse}#laTl td,#laTl th{border:1px solid var(--border);text-align:center;padding:5px 7px;font-size:11px;vertical-align:middle}#laTl thead th{background:linear-gradient(180deg,#00b4c1,var(--primary));color:#fff}#laTl .tl-mat{text-align:left;min-width:210px;max-width:300px;white-space:normal}#laTl th.tl-wk{min-width:92px;white-space:nowrap;font-size:10px;text-transform:none;letter-spacing:0;line-height:1.25}#laTl th.tl-wk .tl-wkno{font-weight:700;font-size:10.5px}#laTl th.tl-wk .tl-wkdt{font-size:8.5px;font-weight:600;opacity:.92;white-space:nowrap}#laTl th.tl-wk .tl-wknow{font-size:8px;letter-spacing:.5px;margin-top:1px}#laTl th.tl-now{background:#f59e0b}#laTl .tl-nowcol{background:rgba(245,158,11,.08)}#laTl .tl-hit{padding:3px}#laTl .tl-pill{border-radius:10px;padding:3px 7px;font-weight:700;font-size:9.5px;color:#fff;white-space:nowrap;display:inline-block}.tl-done{background:#0f9d58}.tl-bad{background:#c0392b}.tl-act{background:#f59e0b}.tl-pend{background:#0e7c8a}body.dark #laTl .tl-nowcol{background:rgba(245,158,11,.14)}#laTl thead th{position:sticky;top:0;z-index:5}#laTl td.tl-frz,#laTl th.tl-frz{position:sticky}#laTl td.tl-frz{background:var(--card-bg);z-index:2}#laTl th.tl-frz{z-index:7}#laTl .tl-frzlast{box-shadow:2px 0 0 0 var(--primary)}#laWrap .tlf-in{padding:6px 10px;border:1px solid var(--border);border-radius:7px;font-size:12px;min-width:150px;background:var(--card-bg);color:var(--text)}#laTl th:nth-child(1),#laTl td:nth-child(1){width:62px}#laTl th:nth-child(2),#laTl td:nth-child(2){width:86px}#laTl th:nth-child(3),#laTl td:nth-child(3){width:200px;white-space:normal}#laTl th:nth-child(5),#laTl td:nth-child(5){width:94px}</style>';
+  var fbar='<div class="la-filters" style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:10px"><input id="tlfMat" class="tlf-in" placeholder="Filter material…" value="'+eh(TL_F.mat)+'"><input id="tlfSup" class="tlf-in" placeholder="Filter supplier…" value="'+eh(TL_F.sup)+'"><input id="tlfPo" class="tlf-in" placeholder="Filter PO No.…" value="'+eh(TL_F.po)+'"><button id="tlfClr" class="dptab" style="padding:6px 12px">Clear</button></div>';
+  wrap.innerHTML=modeTabs+kpis+fbar+style+'<div class="tablewrap"><table id="laTl"><thead><tr>'+th+'</tr></thead><tbody>'+rows+'</tbody></table></div>'+legend;
+  wrap.querySelectorAll('.kpi[data-tlf]').forEach(function(el){el.onclick=function(){var k=el.dataset.tlf;LA_TLF=(LA_TLF===k?'all':k);renderLookahead();};});
+  function freezePanes(){var tbl=wrap.querySelector('#laTl');if(!tbl)return;var FRZ=5;var hdr=tbl.querySelectorAll('thead th');if(hdr.length<FRZ)return;var offs=[],acc=0;for(var i=0;i<FRZ;i++){offs[i]=acc;acc+=hdr[i].offsetWidth;}tbl.querySelectorAll('tr').forEach(function(tr){var cs=tr.children;for(var i=0;i<FRZ&&i<cs.length;i++){var c=cs[i];c.style.left=offs[i]+'px';c.classList.add('tl-frz');if(i===FRZ-1)c.classList.add('tl-frzlast');}});}
+  function tlApply(){var m=(TL_F.mat||'').toLowerCase(),s=(TL_F.sup||'').toLowerCase(),p=(TL_F.po||'').toLowerCase();wrap.querySelectorAll('#laTl tbody tr').forEach(function(tr){if(!tr.dataset.mat&&!tr.dataset.po)return;var ok=(!m||(tr.dataset.mat||'').indexOf(m)>=0)&&(!s||(tr.dataset.sup||'').indexOf(s)>=0)&&(!p||(tr.dataset.po||'').indexOf(p)>=0);tr.style.display=ok?'':'none';});freezePanes();}
+  var im=wrap.querySelector('#tlfMat');if(im)im.oninput=function(){TL_F.mat=this.value;tlApply();};
+  var is=wrap.querySelector('#tlfSup');if(is)is.oninput=function(){TL_F.sup=this.value;tlApply();};
+  var ip=wrap.querySelector('#tlfPo');if(ip)ip.oninput=function(){TL_F.po=this.value;tlApply();};
+  var ic=wrap.querySelector('#tlfClr');if(ic)ic.onclick=function(){TL_F={mat:'',sup:'',po:''};renderLookahead();};
+  freezePanes();tlApply();
+  wrap.querySelectorAll('#laTl tbody tr').forEach(function(tr){if(tr.dataset.id)tr.ondblclick=function(){if(typeof openDelTracker==='function')openDelTracker(+tr.dataset.id);};});
 }
 
 function printView(){
