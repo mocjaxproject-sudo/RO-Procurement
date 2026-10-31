@@ -1615,7 +1615,7 @@ function loadPlanning(file,srcName,silent){
       const byId={}; recs.forEach(p=>{var e=byId[p.aid]; if(!e){byId[p.aid]={aid:p.aid,stage:p.stage,w:p.w,plan:p.plan,act:p.act,finish:p.finish};} else {if(e.w==null&&p.w!=null)e.w=p.w; if(e.plan==null&&p.plan!=null)e.plan=p.plan; if(e.act==null&&p.act!=null)e.act=p.act; if(!e.finish&&p.finish)e.finish=p.finish;}}); const list=Object.values(byId);
       const allv=list.filter(p=>p.act!=null).map(p=>p.act).concat(list.filter(p=>p.plan!=null).map(p=>p.plan));
       const mx=allv.length?Math.max.apply(null,allv):1; const fac=(mx<=1.5)?100:1;
-      if(_ovrP!=null||_ovrA!=null){GRANDOVR={plan:_ovrP!=null?+(_ovrP*fac).toFixed(2):null,actual:_ovrA!=null?+(_ovrA*fac).toFixed(2):null};try{localStorage.setItem('kafd_grandovr',JSON.stringify(GRANDOVR));}catch(e){}}else{GRANDOVR=null;try{localStorage.removeItem('kafd_grandovr');}catch(e){}}
+      GRANDOVR=null;try{localStorage.removeItem('kafd_grandovr');}catch(e){}
       let rebuilt=false;
       if(sawWeight){
         const tot=list.reduce((s,p)=>s+(p.w||0),0)||1;
