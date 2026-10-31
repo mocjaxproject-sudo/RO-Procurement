@@ -1218,7 +1218,7 @@ let REC2={};try{REC2=JSON.parse(localStorage.getItem('kafd_recovery2')||'{}');}c
 let SREC={};try{SREC=JSON.parse(localStorage.getItem('kafd_stagerec')||'{}');}catch(e){SREC={};}
 const STLBL={p_sub:'MT Submission',p_app:'MT Approval',p_po:'PO Placement',p_del:'MT Delivery'};
 const STAGE_ORDER=[['p_sub','MT Submission'],['p_app','MT Approval'],['p_po','PO Placement'],['p_del','MT Delivery']];
-var GRANDOVR=(function(){try{return JSON.parse(localStorage.getItem('kafd_grandovr')||'null');}catch(e){return null;}})();
+var GRANDOVR=null;try{localStorage.removeItem('kafd_grandovr');}catch(e){}
 function computeWeekly(){
   const agg={};STAGE_ORDER.forEach(o=>agg[o[0]]={stage:o[1],total:0,plan:0,actual:0});
   BASELINE.forEach(a=>{const g=agg[a.stage];if(!g)return;g.total+=a.w;g.plan+=a.planw;g.actual+=a.w*(a.act||0)/100;});
